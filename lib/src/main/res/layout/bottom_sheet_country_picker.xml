@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,23 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|end"
         android:orientation="horizontal"
         android:paddingHorizontal="18dp"
         android:paddingVertical="20dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/bottom_sheet_title"
-            android:textSize="16sp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/imageButtonClose"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:tint="?attr/colorOnSurface"
             android:src="@drawable/ic_close_24dp" />
 
     </LinearLayout>
@@ -41,21 +34,21 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="Search country code"
+            android:inputType="text"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
+            app:queryHint="Search country code"
             app:submitBackground="@null" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        tools:listitem="@layout/item_country_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="200dp" />
+        android:minHeight="200dp"
+        tools:listitem="@layout/item_country_picker" />
 
 </LinearLayout>
