@@ -23,7 +23,7 @@ import me.ibrahimsn.lib.internal.ext.default
 import me.ibrahimsn.lib.internal.ext.showIf
 import me.ibrahimsn.lib.internal.ext.toCountryList
 import me.ibrahimsn.lib.internal.io.FileReader
-import java.util.*
+import java.util.Locale
 
 class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
@@ -49,7 +49,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.ThemeOverlay_PhoneNumberKit_BottomSheetDialog)
+        setStyle(STYLE_NORMAL, R.style.BottomSheetDialog)
     }
 
     override fun onCreateView(
@@ -70,7 +70,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
 
     private fun initView() = with(binding) {
         searchView.showIf(args.isSearchEnabled)
-
+        cardSearch.showIf(args.isSearchEnabled)
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(context)
@@ -81,7 +81,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
@@ -123,7 +123,7 @@ class CountryPickerBottomSheet : BottomSheetDialogFragment() {
                 val countries = viewState.value.countries
                 val filtered = countries.filter {
                     it.code.toString().startsWith(query) ||
-                            it.name.lowercase(Locale.ROOT).contains(query.lowercase(Locale.ROOT))
+                        it.name.lowercase(Locale.ROOT).contains(query.lowercase(Locale.ROOT))
                 }
                 binding.recyclerView.post {
                     itemAdapter.setup(filtered)
