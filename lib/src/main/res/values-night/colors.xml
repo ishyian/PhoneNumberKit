@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="search_view_background">#31476D</color>
+    <color name="dialog_background">#071D49</color>
+    <color name="text_color">#FFFFFF</color>
+</resources>

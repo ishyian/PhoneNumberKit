@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/dialog_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -37,10 +38,14 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/search_view_background"
             android:inputType="text"
+            android:theme="@style/SearchView"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
             app:queryHint="Search country code"
+            app:searchHintIcon="@drawable/ic_search"
+            app:searchIcon="@drawable/ic_search"
             app:submitBackground="@null" />
 
     </androidx.cardview.widget.CardView>

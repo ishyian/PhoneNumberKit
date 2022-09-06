@@ -19,4 +19,8 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
+    <style name="SearchView">
+        <item name="android:editTextColor">@color/text_color</item>
+        <item name="android:textColorHint">@color/text_color</item>
+    </style>
 </resources>

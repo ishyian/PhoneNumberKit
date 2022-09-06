@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="search_view_background">#FAFAFA</color>
+    <color name="dialog_background">#FFFFFF</color>
+    <color name="text_color">#000635</color>
 </resources>
