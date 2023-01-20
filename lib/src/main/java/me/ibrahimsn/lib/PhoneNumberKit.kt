@@ -10,20 +10,27 @@ import com.google.android.material.textfield.TextInputLayout
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import me.ibrahimsn.lib.api.Country
 import me.ibrahimsn.lib.api.Phone
 import me.ibrahimsn.lib.internal.core.Proxy
-import me.ibrahimsn.lib.internal.ext.*
+import me.ibrahimsn.lib.internal.ext.clearSpaces
+import me.ibrahimsn.lib.internal.ext.default
+import me.ibrahimsn.lib.internal.ext.doIfAttached
+import me.ibrahimsn.lib.internal.ext.io
+import me.ibrahimsn.lib.internal.ext.toCountryList
 import me.ibrahimsn.lib.internal.io.FileReader
 import me.ibrahimsn.lib.internal.model.State
 import me.ibrahimsn.lib.internal.pattern.CountryPattern
 import me.ibrahimsn.lib.internal.ui.CountryPickerArguments
 import me.ibrahimsn.lib.internal.ui.CountryPickerBottomSheet
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Locale
 
 class PhoneNumberKit private constructor(
     private val context: Context,
@@ -112,6 +119,10 @@ class PhoneNumberKit private constructor(
             country = country,
             pattern = pattern
         )
+    }
+
+    suspend fun getCountryCode(countryName: String): String {
+        return getCountries().firstOrNull { it.name.contains(countryName, true) }?.iso2 ?: ""
     }
 
     fun attachToInput(
