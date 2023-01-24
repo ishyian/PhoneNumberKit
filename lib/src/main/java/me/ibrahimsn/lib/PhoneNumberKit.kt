@@ -124,7 +124,7 @@ class PhoneNumberKit private constructor(
 
     suspend fun getCountry(countryName: String): CountryWithFlag? {
         val country = getCountries().firstOrNull { it.name.contains(countryName, true) } ?: return null
-        return CountryWithFlag(country, getFlagIcon(country.iso2))
+        return CountryWithFlag(country, getFlagIconId(country.iso2))
     }
 
     fun attachToInput(
@@ -283,6 +283,19 @@ class PhoneNumberKit private constructor(
                     "drawable",
                     context.packageName
                 )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    fun getFlagIconId(iso2: String?): Int? {
+        return try {
+            context.resources.getIdentifier(
+                "country_flag_$iso2",
+                "drawable",
+                context.packageName
             )
         } catch (e: Exception) {
             e.printStackTrace()
