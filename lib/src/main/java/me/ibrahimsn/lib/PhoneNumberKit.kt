@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.ibrahimsn.lib.api.Country
+import me.ibrahimsn.lib.api.CountryWithFlag
 import me.ibrahimsn.lib.api.Phone
 import me.ibrahimsn.lib.internal.core.Proxy
 import me.ibrahimsn.lib.internal.ext.clearSpaces
@@ -121,8 +122,9 @@ class PhoneNumberKit private constructor(
         )
     }
 
-    suspend fun getCountryCode(countryName: String): String {
-        return getCountries().firstOrNull { it.name.contains(countryName, true) }?.iso2 ?: ""
+    suspend fun getCountry(countryName: String): CountryWithFlag? {
+        val country = getCountries().firstOrNull { it.name.contains(countryName, true) } ?: return null
+        return CountryWithFlag(country, getFlagIcon(country.iso2))
     }
 
     fun attachToInput(
