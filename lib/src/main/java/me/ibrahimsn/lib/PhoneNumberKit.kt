@@ -122,8 +122,12 @@ class PhoneNumberKit private constructor(
         )
     }
 
-    suspend fun getCountry(countryName: String): CountryWithFlag? {
-        val country = getCountries().firstOrNull { it.name.contains(countryName, true) } ?: return null
+    suspend fun getCountryCodeByName(countryName: String): String {
+        return getCountries().firstOrNull { it.name.contains(countryName, true) }?.iso2 ?: ""
+    }
+
+    suspend fun getCountryByCode(telephoneCode: String): CountryWithFlag? {
+        val country = getCountries().firstOrNull { it.code.toString().contains(telephoneCode) } ?: return null
         return CountryWithFlag(country, getFlagIconId(country.iso2))
     }
 
