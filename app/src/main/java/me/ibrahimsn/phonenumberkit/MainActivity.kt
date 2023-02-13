@@ -1,8 +1,8 @@
 package me.ibrahimsn.phonenumberkit
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import me.ibrahimsn.lib.PhoneNumberKit
 import me.ibrahimsn.phonenumberkit.databinding.ActivityMainBinding
 
@@ -15,12 +15,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val admitCountries = listOf("gt", "us")
         val phoneNumberKit = PhoneNumberKit.Builder(this)
             .setIconEnabled(true)
             .build()
 
         // To attach an editTextLayout
-        phoneNumberKit.attachToInput(binding.textField, "tr")
+        phoneNumberKit.attachToInput(binding.textField, admitCountries[0])
 
         // Setup country code picker optionally
         phoneNumberKit.setupCountryPicker(
